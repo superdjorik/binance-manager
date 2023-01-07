@@ -6,7 +6,7 @@ router = APIRouter()
 session = spot.HTTP(endpoint='https://api.bybit.com')
 
 
-@router.get('/simbols', tags=['unsecured'])
+@router.get('/http/simbols', tags=['http'])
 async def get_all_symbols():
     info = session.query_symbol()
     if info["ret_code"] == 0:
@@ -15,7 +15,7 @@ async def get_all_symbols():
         return info["ret_msg"]
 
 
-@router.get('/count_simbols', tags=['unsecured'])
+@router.get('/http/count_simbols', tags=['http'])
 async def count_symbols_at_stock():
     info = session.query_symbol()
     if info["ret_code"] == 0:
@@ -27,7 +27,7 @@ async def count_symbols_at_stock():
         return info["ret_msg"]
 
 
-@router.get('/orderbook', tags=['unsecured'])
+@router.get('/http/orderbook', tags=['http'])
 async def get_orderbook(symbol: str = 'BTCUSDT'):
     try:
         symbol = session.orderbook(symbol=symbol)
@@ -39,7 +39,7 @@ async def get_orderbook(symbol: str = 'BTCUSDT'):
         return e.message
 
 
-@router.get('/public_trading_records', tags=['unsecured'])
+@router.get('/http/public_trading_records', tags=['http'])
 async def public_trading_records(symbol: str = 'BTCUSDT'):
     try:
         symbol = session.public_trading_records(symbol=symbol)

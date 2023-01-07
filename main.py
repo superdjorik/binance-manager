@@ -1,11 +1,12 @@
 import uvicorn
 from fastapi import FastAPI
-from app import bybit_endpoints
+from app.bybit import bybit_http_endpoints, bybit_websockets_endpoints
 
 app = FastAPI()
 
 
-app.include_router(bybit_endpoints.router)
+app.include_router(bybit_http_endpoints.router)
+# app.include_router(bybit_websockets_endpoints.router)
 
 
 # Healthcheck
