@@ -1,12 +1,14 @@
 from datetime import datetime
 import uvicorn
 from fastapi import FastAPI
+from app import tgram
 from app.bybit import bybit_http_endpoints, bybit_websockets_endpoints
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 app = FastAPI()
 app.include_router(bybit_http_endpoints.router)
 app.include_router(bybit_websockets_endpoints.router)
+app.include_router(tgram.router)
 
 # Scheduler configs and start
 scheduler = AsyncIOScheduler()
